@@ -1,331 +1,253 @@
-🚨 Real-Time AI Command Center for Emergency Dispatch
-AI Triage • Intelligent Resource Allocation • Routing • Simulation • Command Center Dashboard
-
-A fully integrated AI-driven emergency command center designed for real-time incident management, triage classification, resource allocation, hospital recommendation, routing, and simulation.
-The system leverages Next.js, Google Genkit (LLM/AI), MapLibre + OSRM, and modular architecture for real-world deployment.
-
-📌 Table of Contents
-
-Overview
-
-Key Features
-
-System Architecture
-
-Tech Stack
-
-Folder Structure
-
-Installation & Setup
-
-Environment Variables
-
-Running the Application
-
-AI Subsystem
-
-Routing & Mapping
-
-Simulation & Testing
-
-Screenshots / Figures
-
-Contributors
-
-🧠 Overview
-
-This system addresses critical weaknesses in traditional emergency medical dispatch systems — such as slow manual triage, inefficient routing, and manual hospital selection — by integrating:
-
-AI NLP triage classifier
-
-AI-based dispatch package recommender
-
-Hospital recommendation engine
-
-Real-time map, routing, and fleet tracking
-
-Simulated incident workflow with auto-generated debriefs
-
-All of these are validated through 100+ simulated emergency scenarios (50 standard + 50 mass-casualty) 
-
-A Real Time AI Command Center f…
-
-.
-
-⭐ Key Features
-🔹 AI Features
-
-Automatic triage of caller reports (LLM-based)
-
-Entity extraction for key incident factors
-
-Dispatch package recommendation
-
-Intelligent hospital recommendation
-
-AI-generated protocols & traffic analysis
-
-Automated debrief report generation
-
-🔹 Command Center Features
-
-Live dashboard for active incidents
-
-Real-time fleet tracking
-
-Incident lifecycle management
-
-Route visualization (fastest driving path)
-
-Manual override for critical operations
-
-🔹 Simulation Features
-
-Scenario-based simulation (standard + disaster events)
-
-Response-time evaluation
-
-Classification accuracy reporting
-
-AI failure-capture and debrief analysis
-
-🏗️ System Architecture
-
-The architecture consists of AI core + Dashboard + Routing + Simulation environment.
-
-📌 High-Level Architecture (Page 1–2)
-
-Caller → AI Triage → Recommended Dispatch → Hospital Recommendation → OSRM Routing → Command Center UI → Debrief
-
-
-A Real Time AI Command Center f…
-
-📌 Component Architecture (Page 2–3)
-
-Modules include:
-
-AI flows (src/ai/flows/*)
-
-Dashboard (src/components/dashboard/*)
-
-Incident management
-
-MapLibre + OSRM routing layer
-
-Reusable UI components
-
-
-A Real Time AI Command Center f…
-
-🧰 Tech Stack
-Frontend / Command Center
-
-Next.js 14
-
-React 18
-
-TypeScript
-
-Tailwind CSS + ShadCN UI
-
-React Map GL / MapLibre
-
-AI / NLP / LLM
-
-Google Genkit
-
-LLM few-shot classification
-
-BERT-based text model (training analysis)
-
-Routing
-
-OSRM (Open Source Routing Machine)
-
-Contraction Hierarchies (fast routing)
-
-Utilities
-
-geolib (distance & Haversine)
-
-Zustand / Context
-
-Axios / Fetch
-
-📁 Folder Structure
-├── src/
-│   ├── ai/
-│   │   ├── flows/
-│   │   │   ├── analyze-report.ts
-│   │   │   ├── get-dispatch-package.ts
-│   │   │   ├── recommend-hospital.ts
-│   │   │   ├── get-protocol.ts
-│   │   │   ├── get-traffic-report.ts
-│   │   │   ├── summarize-incident.ts
-│   │   │   └── debrief-incident.ts
-│   │   └── genkit.ts
-│   ├── components/
-│   │   ├── dashboard/
-│   │   ├── incident/
-│   │   ├── map/
-│   │   └── ui/
-│   ├── theme/
-│   ├── utils/
-│   └── pages/
-├── public/
-├── package.json
-└── README.md
-
-⚙️ Installation & Setup
-1. Clone the Repository
+# 🚨 Real-Time AI Command Center for Emergency Dispatch  
+### **AI Triage • Intelligent Resource Allocation • Routing • Simulation**
+
+This project implements a fully integrated **AI-powered Emergency Dispatch Command Center** designed to optimize triage, resource allocation, and routing in real-time. It combines **AI text classification**, **constraint-based recommendations**, **live fleet tracking**, and **simulation workflows** to support emergency response operations.
+
+---
+
+## 📌 Table of Contents
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [System Architecture](#system-architecture)
+- [Tech Stack](#tech-stack)
+- [Folder Structure](#folder-structure)
+- [Installation & Setup](#installation--setup)
+- [Environment Variables](#environment-variables)
+- [Running the Application](#running-the-application)
+- [AI Subsystem](#ai-subsystem)
+- [Routing & Mapping](#routing--mapping)
+- [Simulation & Testing](#simulation--testing)
+- [Screenshots](#screenshots)
+- [Contributors](#contributors)
+
+---
+
+## 🧠 Overview
+This system modernizes emergency medical dispatch workflows by providing:
+
+- Automated **AI triage** of caller reports  
+- Intelligent **resource and hospital recommendation**  
+- Real-time **fleet tracking and routing**  
+- End-to-end **incident simulation and auto-debriefs**
+
+The system is validated using both standard and mass-casualty scenarios.
+
+---
+
+## ⭐ Key Features
+
+### 🔹 AI Intelligence
+- LLM-based incident triage (few-shot prompting)
+- Key entity extraction from caller text
+- Dispatch package recommendation
+- Hospital recommendation using multi-constraint evaluation
+- AI-generated protocols and traffic reports
+- Automated incident debriefs
+
+### 🔹 Command Center Capabilities
+- Interactive dashboard for live incidents
+- Responder fleet tracking on MapLibre
+- Route visualization via OSRM
+- Logging and incident timeline view
+- Manual override controls
+
+### 🔹 Simulation Tools
+- 100+ scenario library (standard + disaster)
+- Performance metrics:
+  - Triage Accuracy
+  - Recommendation Appropriateness
+  - Simulated Response Time
+- Automatic performance reporting
+
+---
+
+## 🏗️ System Architecture
+
+### High-Level Workflow
+1. Caller report received  
+2. AI triage + key factors extraction  
+3. Dispatch package recommendation  
+4. Hospital suggestion  
+5. OSRM route computation  
+6. Command Center dashboard visualization  
+7. AI-generated incident debrief  
+
+### Major Components
+- **AI Subsystem** (`src/ai/flows/*`)
+- **Dashboard** (`src/components/dashboard/*`)
+- **Incident Manager** (`src/components/incident/*`)
+- **Routing & Maps** (`src/components/map/*`)
+- **UI System** (ShadCN + Tailwind)
+
+---
+
+## 🧰 Tech Stack
+
+### Frontend
+- Next.js 14  
+- React 18  
+- TypeScript  
+- Tailwind CSS + ShadCN UI  
+
+### AI / NLP
+- Google Genkit  
+- LLM (Gemini/GPT)  
+- BERT-based classifier (training analysis)
+
+### Mapping & Routing
+- MapLibre GL  
+- React Map GL  
+- OSRM (Open Source Routing Machine)
+
+### Utilities
+- geolib (Haversine distance)  
+- Zustand / Context  
+- Axios / Fetch  
+
+---
+
+## 📁 Folder Structure
+
+src/
+├── ai/
+│ ├── flows/
+│ │ ├── analyze-report.ts
+│ │ ├── get-dispatch-package.ts
+│ │ ├── recommend-hospital.ts
+│ │ ├── get-protocol.ts
+│ │ ├── get-traffic-report.ts
+│ │ ├── summarize-incident.ts
+│ │ └── debrief-incident.ts
+│ └── genkit.ts
+├── components/
+│ ├── dashboard/
+│ ├── incident/
+│ ├── map/
+│ └── ui/
+├── theme/
+├── utils/
+└── pages/
+
+yaml
+Copy code
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the Repository
+```bash
 git clone https://github.com/<your-org>/emergency-command-center.git
 cd emergency-command-center
-
 2. Install Dependencies
+bash
+Copy code
 npm install
-# or
-yarn install
-
-3. Install OSRM (Required for routing)
-Linux/Mac
-brew install osrm-backend
-
-Run OSRM with your map extract
-osrm-extract map.osm.pbf -p profiles/car.lua
-osrm-contract map.osrm
-osrm-routed map.osrm
-
-
-OR use a hosted OSRM server.
-
 🔐 Environment Variables
-
 Create a .env.local file:
 
+env
+Copy code
 GOOGLE_GENKIT_API_KEY=your_key
 OSRM_SERVER_URL=http://localhost:5000
 NEXT_PUBLIC_MAPTILER_KEY=your_key
-AI_MODEL=gemini-pro   # or any supported Genkit model
-
+AI_MODEL=gemini-pro
 🚀 Running the Application
-Development Mode
+Development
+bash
+Copy code
 npm run dev
+Visit: http://localhost:3000
 
-
-Access at http://localhost:3000
-
-Production Build
+Production
+bash
+Copy code
 npm run build
 npm start
-
 🤖 AI Subsystem
-🔹 Triage Classification
+1. Triage Classification
+LLM-based few-shot prompting
 
-Uses Few-Shot LLM prompting
+Extracts key factors
 
-Extracts key entities
+Outputs confidence score
 
-Produces incident type + confidence
+2. Dispatch Package Recommender
+Determines vehicle types & counts
 
+Supports multi-agency incidents
 
-A Real Time AI Command Center f…
-
-🔹 Dispatch Package Generator
-
-Recommends:
-
-Number of ambulances
-
-Fire units
-
-Police units
-
-Disaster response teams
-
-🔹 Hospital Recommender
-
+3. Hospital Recommendation
 Evaluates:
-
-Speciality match
 
 Bed availability
 
-Distance
+Speciality match
 
-Traffic
+Travel distance
 
-Live routing score
+Live traffic
 
+4. Debrief Generator
+Auto-generates timeline
 
-A Real Time AI Command Center f…
+Highlights failures & improvements
 
 🗺️ Routing & Mapping
+Map rendering with MapLibre
 
-Map rendering using MapLibre/React-Map-GL
+OSRM-based driving route computation
 
-Routing calculated using OSRM with real-time paths
+Multi-unit routing overlays
 
-Route visualized as polyline
-
-Supports multiple responder paths simultaneously
-
-
-A Real Time AI Command Center f…
+Real-time updates during dispatch
 
 🧪 Simulation & Testing
-✔ Standard Scenario Set — 50 incidents
-✔ Disaster Scenario Set — 50 mass-casualty events
-Evaluation Metrics (Fig. 5):
+Scenario Library
+50 standard emergency cases
 
-Triage Accuracy
+50 mass-casualty disaster cases
 
-Recommendation Appropriateness
+Metrics Evaluated
+Triage accuracy
 
-Simulated Response Time
+Recommendation correctness
 
+Response time projections
 
-A Real Time AI Command Center f…
-
-Model Metrics (Fig. 12):
-
+Model Performance
 Precision: 0.98–1.00
 
 Recall: 0.96–1.00
 
-F1-Score: Consistently high across all categories
+F1-Score: High across all classes
 
+Stable learning curve (no overfitting)
 
-A Real Time AI Command Center f…
+🖼 Screenshots
+Screenshots should be placed under /public/screenshots.
 
-Learning Curve (Fig. 13):
+Recommended screenshots:
 
-Stable convergence
+Architecture Diagram
 
-No overfitting
+Command Center Dashboard
 
+AI Triage Panel
 
-A Real Time AI Command Center f…
+Dispatch Confirmation
 
-🖼 Screenshots / Figures
+Route View
 
-Include visuals from the PDF:
+Incident Debrief
 
-Feature	Page
-Architecture Diagram	Page 1–2
-Command Center Dashboard	Page 4 (Fig. 6)
-AI Triage Panel	Page 4 (Fig. 7)
-Dispatch Confirmation	Page 4 (Fig. 8)
-Routing Visualization	Page 5 (Fig. 9)
-Debrief Panel	Page 5 (Fig. 11)
-Classification Report	Page 5 (Fig. 12)
-Learning Curve	Page 6 (Fig. 13)
+Classification Report
 
-Screenshots can be added inside /public/screenshots.
+Learning Curve
 
 👨‍💻 Contributors
+Faizan Ahmed — CSE, Presidency University
 
-Faizan Ahmed, CSE, Presidency University
+Zoya Alam — CSE, Presidency University
 
-Zoya Alam, CSE, Presidency University
-
-Pavitra Hiremath, CSE, Presidency University
+Pavitra Hiremath — CSE, Presidency University
