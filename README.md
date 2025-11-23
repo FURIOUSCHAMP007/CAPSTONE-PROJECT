@@ -1,253 +1,328 @@
-# 🚨 Real-Time AI Command Center for Emergency Dispatch  
+
+# 🚨 Real-Time AI Command Center for Emergency Dispatch
+
 ### **AI Triage • Intelligent Resource Allocation • Routing • Simulation**
 
-This project implements a fully integrated **AI-powered Emergency Dispatch Command Center** designed to optimize triage, resource allocation, and routing in real-time. It combines **AI text classification**, **constraint-based recommendations**, **live fleet tracking**, and **simulation workflows** to support emergency response operations.
+This repository contains a fully integrated **AI-powered Emergency Dispatch Command Center**, built to modernize emergency response through intelligent triage, advanced decision-making, real-time routing, and automated post-incident analysis.
+It is designed for real-world emergency environments such as **ambulance dispatch centers**, **smart cities**, and **disaster response units**.
 
 ---
 
 ## 📌 Table of Contents
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [System Architecture](#system-architecture)
-- [Tech Stack](#tech-stack)
-- [Folder Structure](#folder-structure)
-- [Installation & Setup](#installation--setup)
-- [Environment Variables](#environment-variables)
-- [Running the Application](#running-the-application)
-- [AI Subsystem](#ai-subsystem)
-- [Routing & Mapping](#routing--mapping)
-- [Simulation & Testing](#simulation--testing)
-- [Screenshots](#screenshots)
-- [Contributors](#contributors)
+
+* [Overview](#overview)
+* [Key Features](#key-features)
+* [System Architecture](#system-architecture)
+* [Tech Stack](#tech-stack)
+* [Folder Structure](#folder-structure)
+* [Installation & Setup](#installation--setup)
+* [Environment Variables](#environment-variables)
+* [Running the Application](#running-the-application)
+* [AI Subsystem](#ai-subsystem)
+* [Routing & Mapping](#routing--mapping)
+* [Simulation & Testing](#simulation--testing)
+* [Screenshots](#screenshots)
+* [Contributors](#contributors)
+* [License](#license)
 
 ---
 
 ## 🧠 Overview
-This system modernizes emergency medical dispatch workflows by providing:
 
-- Automated **AI triage** of caller reports  
-- Intelligent **resource and hospital recommendation**  
-- Real-time **fleet tracking and routing**  
-- End-to-end **incident simulation and auto-debriefs**
+Emergency dispatch systems in large urban environments often suffer from slow manual workflows, incorrect triage, and inefficient routing.
+This platform solves those problems by combining:
 
-The system is validated using both standard and mass-casualty scenarios.
+* **Multimodal AI triage**
+* **Intelligent dispatch recommendations**
+* **Hospital selection based on capabilities, distance & traffic**
+* **Real-time responder routing & fleet monitoring**
+* **Complete simulation environment with performance analytics**
+* **Auto-generated debrief reports for incident analysis**
+
+The full methodology, architecture, algorithms, and experiments are documented in the research PDF.
 
 ---
 
 ## ⭐ Key Features
 
 ### 🔹 AI Intelligence
-- LLM-based incident triage (few-shot prompting)
-- Key entity extraction from caller text
-- Dispatch package recommendation
-- Hospital recommendation using multi-constraint evaluation
-- AI-generated protocols and traffic reports
-- Automated incident debriefs
+
+* NLP-based triage classification (LLM / BERT)
+* Extraction of key incident factors
+* Intelligent multi-agency vehicle recommendation
+* Hospital ranking system with traffic & capability scoring
+* AI-generated protocols, summaries, and debrief reports
 
 ### 🔹 Command Center Capabilities
-- Interactive dashboard for live incidents
-- Responder fleet tracking on MapLibre
-- Route visualization via OSRM
-- Logging and incident timeline view
-- Manual override controls
+
+* Real-time MapLibre-based dashboard
+* Live fleet tracking with status indicators
+* Incident creation, editing, and audit logs
+* Dynamic routing via OSRM
+* Manual overrides for critical situations
 
 ### 🔹 Simulation Tools
-- 100+ scenario library (standard + disaster)
-- Performance metrics:
-  - Triage Accuracy
-  - Recommendation Appropriateness
-  - Simulated Response Time
-- Automatic performance reporting
+
+* Supports **100 simulation scenarios** (50 standard + 50 disaster)
+* Visual evaluation workflow
+* Performance metrics:
+
+  * Triage Accuracy
+  * Recommendation Appropriateness
+  * Simulated Response Time
 
 ---
 
 ## 🏗️ System Architecture
 
-### High-Level Workflow
-1. Caller report received  
-2. AI triage + key factors extraction  
-3. Dispatch package recommendation  
-4. Hospital suggestion  
-5. OSRM route computation  
-6. Command Center dashboard visualization  
-7. AI-generated incident debrief  
+### **High-Level Flow**
 
-### Major Components
-- **AI Subsystem** (`src/ai/flows/*`)
-- **Dashboard** (`src/components/dashboard/*`)
-- **Incident Manager** (`src/components/incident/*`)
-- **Routing & Maps** (`src/components/map/*`)
-- **UI System** (ShadCN + Tailwind)
+```
+Caller Report → AI Triage → Dispatch Recommendations → Hospital Selection 
+               → Route Computation (OSRM) → Command Center Dashboard 
+               → Incident Debrief Generation
+```
+
+### **Major Components**
+
+* **AI Subsystem**
+
+  * Triage classifier
+  * Dispatch package recommender
+  * Hospital recommender
+  * Protocol & traffic generator
+  * Debrief generator
+
+* **Dashboard System**
+
+  * Analytics dashboard
+  * Dispatch dashboard
+  * Incident timeline & summaries
+  * Fleet status monitor
+
+* **Map & Routing**
+
+  * MapLibre GL
+  * React Map GL
+  * OSRM (fast routing engine)
 
 ---
 
 ## 🧰 Tech Stack
 
-### Frontend
-- Next.js 14  
-- React 18  
-- TypeScript  
-- Tailwind CSS + ShadCN UI  
+### Frontend & UI
 
-### AI / NLP
-- Google Genkit  
-- LLM (Gemini/GPT)  
-- BERT-based classifier (training analysis)
+* Next.js 14
+* React 18
+* TypeScript
+* Tailwind CSS
+* ShadCN UI Components
 
-### Mapping & Routing
-- MapLibre GL  
-- React Map GL  
-- OSRM (Open Source Routing Machine)
+### AI / ML
+
+* Google **Genkit** (LLM Pipelines)
+* BERT-based classifier (architecture referenced in analysis)
+* Few-shot prompt engineering
+
+### Maps & Routing
+
+* MapLibre GL
+* React Map GL
+* **OSRM (Open Source Routing Machine)**
+* Haversine-based nearest responder algorithm
 
 ### Utilities
-- geolib (Haversine distance)  
-- Zustand / Context  
-- Axios / Fetch  
+
+* geolib
+* Axios / Fetch
+* Zustand or React Context
 
 ---
 
 ## 📁 Folder Structure
 
+```
 src/
-├── ai/
-│ ├── flows/
-│ │ ├── analyze-report.ts
-│ │ ├── get-dispatch-package.ts
-│ │ ├── recommend-hospital.ts
-│ │ ├── get-protocol.ts
-│ │ ├── get-traffic-report.ts
-│ │ ├── summarize-incident.ts
-│ │ └── debrief-incident.ts
-│ └── genkit.ts
-├── components/
-│ ├── dashboard/
-│ ├── incident/
-│ ├── map/
-│ └── ui/
-├── theme/
-├── utils/
-└── pages/
-
-yaml
-Copy code
+ ├── ai/
+ │    ├── flows/
+ │    │    ├── analyze-report.ts
+ │    │    ├── get-dispatch-package.ts
+ │    │    ├── recommend-hospital.ts
+ │    │    ├── get-protocol.ts
+ │    │    ├── get-traffic-report.ts
+ │    │    ├── summarize-incident.ts
+ │    │    └── debrief-incident.ts
+ │    └── genkit.ts
+ ├── components/
+ │    ├── dashboard/
+ │    ├── incident/
+ │    ├── map/
+ │    └── ui/
+ ├── theme/
+ ├── utils/
+ └── pages/
+```
 
 ---
 
 ## ⚙️ Installation & Setup
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/<your-org>/emergency-command-center.git
-cd emergency-command-center
-2. Install Dependencies
-bash
-Copy code
-npm install
-🔐 Environment Variables
-Create a .env.local file:
+### **1. Clone the Repository**
 
-env
-Copy code
+```bash
+git clone https://github.com/<your-org>/ai-command-center.git
+cd ai-command-center
+```
+
+### **2. Install Dependencies**
+
+```bash
+npm install
+```
+
+---
+
+## 🔐 Environment Variables
+
+Create a `.env.local` file:
+
+```env
 GOOGLE_GENKIT_API_KEY=your_key
 OSRM_SERVER_URL=http://localhost:5000
-NEXT_PUBLIC_MAPTILER_KEY=your_key
+NEXT_PUBLIC_MAPTILER_KEY=your_map_key
 AI_MODEL=gemini-pro
-🚀 Running the Application
-Development
-bash
-Copy code
-npm run dev
-Visit: http://localhost:3000
+```
 
-Production
-bash
-Copy code
+---
+
+## 🚀 Running the Application
+
+### **Development Mode**
+
+```bash
+npm run dev
+```
+
+Access at:
+👉 [http://localhost:3000](http://localhost:3000)
+
+### **Production Build**
+
+```bash
 npm run build
 npm start
-🤖 AI Subsystem
-1. Triage Classification
-LLM-based few-shot prompting
+```
 
-Extracts key factors
+---
 
-Outputs confidence score
+## 🤖 AI Subsystem
 
-2. Dispatch Package Recommender
-Determines vehicle types & counts
+### 1. **AI Triage Classification**
 
-Supports multi-agency incidents
+* Uses Few-Shot LLM (Genkit)
+* Extracts key incident entities
+* Outputs classification with confidence
 
-3. Hospital Recommendation
+### 2. **Dispatch Package Generator**
+
+* Determines:
+
+  * Ambulances
+  * Fire units
+  * Police units
+  * Disaster response units
+
+### 3. **Hospital Recommender**
+
 Evaluates:
 
-Bed availability
+* Specialization match
+* Bed availability
+* Distance
+* Traffic conditions
 
-Speciality match
+### 4. **Debrief Generator**
 
-Travel distance
+Creates:
 
-Live traffic
+* Timeline of events
+* Key factors affecting outcome
+* What went well
+* Areas for improvement
 
-4. Debrief Generator
-Auto-generates timeline
+---
 
-Highlights failures & improvements
+## 🗺️ Routing & Mapping
 
-🗺️ Routing & Mapping
-Map rendering with MapLibre
+### **Map Features**
 
-OSRM-based driving route computation
+* Live responder locations
+* New incident markers
+* Real-time view of fleet status
 
-Multi-unit routing overlays
+### **Routing Engine**
 
-Real-time updates during dispatch
+* OSRM via API
+* Contraction Hierarchies routing
+* Displays fastest driving route
+* Supports multi-unit deployment
 
-🧪 Simulation & Testing
-Scenario Library
-50 standard emergency cases
+### **Nearest Responder Algorithm**
 
-50 mass-casualty disaster cases
+* Haversine formula (via geolib)
+* Selects closest available responder
 
-Metrics Evaluated
-Triage accuracy
+---
 
-Recommendation correctness
+## 🧪 Simulation & Testing
 
-Response time projections
+### **Scenario Sets**
 
-Model Performance
-Precision: 0.98–1.00
+* **50 Standard Emergency Events**
+* **50 Mass-Casualty / Disaster Events**
 
-Recall: 0.96–1.00
+### **Evaluation Metrics**
 
-F1-Score: High across all classes
+* Triage Accuracy
+* Recommendation Appropriateness
+* Simulated Response Time
 
-Stable learning curve (no overfitting)
+### **Model Performance (from Research)**
 
-🖼 Screenshots
-Screenshots should be placed under /public/screenshots.
+* Precision: **0.98–1.00**
+* Recall: **0.96–1.00**
+* F1 Score: **High across all categories**
+* Stable learning curves (no overfitting)
 
-Recommended screenshots:
+---
 
-Architecture Diagram
+## 🖼 Screenshots
 
-Command Center Dashboard
+*(Add these images inside `/public/screenshots/` in your repo)*
 
-AI Triage Panel
+Suggested screenshots:
 
-Dispatch Confirmation
+* System Architecture Diagram
+* Command Center Dashboard
+* AI Triage Panel
+* Dispatch Confirmation Popup
+* OSRM Route Visualization
+* Incident Debrief Report
+* Classification Report
+* Learning Curve Plot
 
-Route View
+---
 
-Incident Debrief
+## 👨‍💻 Contributors
 
-Classification Report
+* **Faizan Ahmed** — Presidency University
+* **Zoya Alam** — Presidency University
+* **Pavitra Hiremath** — Presidency University
 
-Learning Curve
+---
 
-👨‍💻 Contributors
-Faizan Ahmed — CSE, Presidency University
+## 📜 License
 
-Zoya Alam — CSE, Presidency University
+MIT License (or select your preferred license)
 
-Pavitra Hiremath — CSE, Presidency University
+
